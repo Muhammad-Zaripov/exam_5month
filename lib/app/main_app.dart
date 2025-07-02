@@ -2,7 +2,6 @@ import 'package:exam_5month/features/home/presentation/bloc/table_bloc.dart';
 import 'package:exam_5month/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../features/home/data/datasources/table_remote_datasource.dart';
 import '../features/home/data/repositories/table_repository_impl.dart';
 
@@ -13,7 +12,7 @@ class MainApp extends StatelessWidget {
     final TableRepository repository = TableRepository(TableRemoteDataSource());
     return MultiBlocProvider(
       providers: [BlocProvider(create: (_) => TableBloc(repository))],
-      child: MaterialApp(home: Scaffold(body: RestaurantHomeScreen())),
+      child: MaterialApp(home: RestaurantHomeScreen()),
     );
   }
 }

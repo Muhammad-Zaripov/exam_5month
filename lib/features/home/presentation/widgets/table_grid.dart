@@ -13,15 +13,6 @@ class TablesGrid extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Stollar joylashuvi',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(height: 15),
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.all(20),

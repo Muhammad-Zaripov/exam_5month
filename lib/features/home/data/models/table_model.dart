@@ -27,6 +27,7 @@ class TableModel {
   TableStatus status;
   final int tableNumber;
   final UserModel? user;
+
   TableModel({
     this.id,
     required this.seats,
@@ -34,6 +35,7 @@ class TableModel {
     required this.tableNumber,
     this.user,
   });
+
   factory TableModel.fromJson(Map<String, dynamic> json) {
     return TableModel(
       seats: json['seats'],
@@ -45,6 +47,7 @@ class TableModel {
       user: json['user'] == 'null' ? null : json['user'],
     );
   }
+
   Map<String, dynamic> toJson() {
     return {
       'seats': seats,
@@ -70,40 +73,3 @@ class TableModel {
     );
   }
 }
-
-// enum TableStatus { available, occupied, reserved, cleaning }
-
-// class TableModel {
-//   final int seats;
-//   final TableStatus status;
-//   final int tableNumber;
-//   final String? user;
-
-//   TableModel({
-//     required this.seats,
-//     required this.status,
-//     required this.tableNumber,
-//     this.user,
-//   });
-
-//   factory TableModel.fromJson(Map<String, dynamic> json) {
-//     return TableModel(
-//       seats: json['seats'],
-//       status: TableStatus.values.firstWhere(
-//         (e) => e.name == json['status'],
-//         orElse: () => TableStatus.available,
-//       ),
-//       tableNumber: json['tableNumber'],
-//       user: json['user'] == 'null' ? null : json['user'],
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'seats': seats,
-//       'status': status.name,
-//       'tableNumber': tableNumber,
-//       'user': user ?? 'null',
-//     };
-//   }
-// }

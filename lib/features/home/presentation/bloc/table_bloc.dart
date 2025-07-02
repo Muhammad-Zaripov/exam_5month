@@ -16,5 +16,16 @@ class TableBloc extends Bloc<TableEvent, TableState> {
         emit(TableError(e.toString()));
       }
     });
+
+    on<AddTable>((event, emit) async {
+      try {
+        await repository.addTable(event.table);
+        // Optional: reload all tables after adding
+        final updatedTables = await repository.getTables();
+        emit(TableLoaded(updatedTables));
+      } catch (e) {
+        emit(TableError(e.toString()));
+      }
+    });
   }
 }

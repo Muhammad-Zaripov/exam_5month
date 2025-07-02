@@ -6,5 +6,11 @@ class TableRepository {
 
   TableRepository(this.remote);
 
-  Future<List<TableModel>> getTables() => remote.fetchTables();
+  Future<List<TableModel>> getTables() async {
+    return remote.fetchTables();
+  }
+
+  Future<void> addTable(TableModel table) async {
+    await remote.addTable(table);
+  }
 }
