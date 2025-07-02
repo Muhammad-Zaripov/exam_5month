@@ -4,8 +4,7 @@ import 'table_card.dart';
 
 class TablesGrid extends StatelessWidget {
   final List<TableModel> tables;
-  final Function(TableModel) onTableTap;
-  const TablesGrid({super.key, required this.tables, required this.onTableTap});
+  const TablesGrid({super.key, required this.tables});
   @override
   Widget build(BuildContext context) {
     final mediaQueryW = MediaQuery.of(context).size.width;
