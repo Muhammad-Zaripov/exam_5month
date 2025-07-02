@@ -20,7 +20,6 @@ class RestaurantStats extends StatelessWidget {
     final cleaning = tables
         .where((t) => t.status == TableStatus.cleaning)
         .length;
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -45,7 +44,7 @@ class RestaurantStats extends StatelessWidget {
           SizedBox(width: 15),
           Expanded(
             child: StateCard(
-              title: 'Zaxira',
+              title: 'Bron',
               count: reserved,
               color: Color(0xFFFF9800),
               icon: Icons.schedule,

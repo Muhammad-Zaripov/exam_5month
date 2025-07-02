@@ -1,12 +1,11 @@
+import 'package:exam_5month/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/category_model.dart';
 
 class CategoriesList extends StatelessWidget {
   final void Function(CategoryModel)? onCategoryTap;
-
-  CategoriesList({super.key, this.onCategoryTap});
-
+  CategoriesList({super.key, this.onCategoryTap, required Map<CategoryModel, List<MenuModel>> categoryProducts});
   final List<CategoryModel> categories = [
     CategoryModel(name: 'Qahvalar', icon: Icons.local_cafe),
     CategoryModel(name: 'Salatlar', icon: Icons.local_dining),
@@ -14,7 +13,6 @@ class CategoriesList extends StatelessWidget {
     CategoryModel(name: 'Ichimliklar', icon: Icons.local_drink),
     CategoryModel(name: 'Asosiy taomlar', icon: Icons.restaurant_menu),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Container(

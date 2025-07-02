@@ -5,7 +5,7 @@ import '../../data/models/table_model.dart';
 class BalanceScreen extends StatelessWidget {
   final TableModel table;
   final VoidCallback onPaid;
-  const BalanceScreen({super.key, required this.table,required this.onPaid});
+  const BalanceScreen({super.key, required this.table, required this.onPaid});
 
   @override
   Widget build(BuildContext context) {

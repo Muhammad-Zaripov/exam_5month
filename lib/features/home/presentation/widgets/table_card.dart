@@ -4,9 +4,8 @@ import '../../data/models/table_model.dart';
 
 class TableCard extends StatefulWidget {
   final TableModel table;
-  final VoidCallback onTap;
 
-  const TableCard({super.key, required this.table, required this.onTap});
+  const TableCard({super.key, required this.table});
 
   @override
   _TableCardState createState() => _TableCardState();
@@ -21,10 +20,10 @@ class _TableCardState extends State<TableCard>
   void initState() {
     super.initState();
     _pulseController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 800),
       vsync: this,
     );
-    _pulseAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+    _pulseAnimation = Tween<double>(begin: 1.02, end: 0.98).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
@@ -68,7 +67,6 @@ class _TableCardState extends State<TableCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
       child: AnimatedBuilder(
         animation: _pulseAnimation,
         builder: (context, child) {
@@ -95,7 +93,7 @@ class _TableCardState extends State<TableCard>
                   Icon(_getStatusIcon(), color: _getStatusColor(), size: 30),
                   SizedBox(height: 8),
                   Text(
-                    'Stol ${widget.table.number}',
+                    'Stol ${widget.table.tableNumber}',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

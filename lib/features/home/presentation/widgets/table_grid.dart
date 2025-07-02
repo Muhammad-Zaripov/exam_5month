@@ -5,9 +5,7 @@ import 'table_card.dart';
 class TablesGrid extends StatelessWidget {
   final List<TableModel> tables;
   final Function(TableModel) onTableTap;
-
   const TablesGrid({super.key, required this.tables, required this.onTableTap});
-
   @override
   Widget build(BuildContext context) {
     final mediaQueryW = MediaQuery.of(context).size.width;
@@ -21,7 +19,7 @@ class TablesGrid extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: Colors.black,
             ),
           ),
           SizedBox(height: 15),
@@ -36,10 +34,7 @@ class TablesGrid extends StatelessWidget {
               ),
               itemCount: tables.length,
               itemBuilder: (context, index) {
-                return TableCard(
-                  table: tables[index],
-                  onTap: () => onTableTap(tables[index]),
-                );
+                return TableCard(table: tables[index]);
               },
             ),
           ),

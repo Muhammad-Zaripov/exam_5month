@@ -1,135 +1,199 @@
 import 'package:flutter/material.dart';
-
-import '../../data/models/category_model.dart';
 import '../../data/models/product_model.dart';
+import '../../data/models/category_model.dart';
 import '../widgets/categories_list.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  final Map<String, List<ProductModel>> categoryProducts = {
-    'Qahvalar': [
-      ProductModel(name: 'Espresso', price: 15000, image: 'espresso.jpg'),
-      ProductModel(name: 'Cappuccino', price: 18000, image: ''),
-      ProductModel(name: 'Latte', price: 20000, image: 'latte.jpg'),
-      ProductModel(name: 'Americano', price: 17000, image: ''),
-      ProductModel(name: 'Mocha', price: 22000, image: ''),
+  final CategoryModel qahvalar = CategoryModel(name: 'Qahvalar');
+  final CategoryModel salatlar = CategoryModel(name: 'Salatlar');
+  final CategoryModel shirinliklar = CategoryModel(name: 'Shirinliklar');
+  final CategoryModel ichimliklar = CategoryModel(name: 'Ichimliklar');
+  final CategoryModel asosiyTaomlar = CategoryModel(name: 'Asosiy taomlar');
+
+  late final Map<CategoryModel, List<MenuModel>> categoryProducts = {
+    qahvalar: [
+      MenuModel(
+        name: 'Espresso',
+        price: 15000,
+        image: 'espresso.jpg',
+        category: qahvalar,
+      ),
+      MenuModel(
+        name: 'Cappuccino',
+        price: 18000,
+        image: 'cappuccino.jpg',
+        category: qahvalar,
+      ),
+      MenuModel(
+        name: 'Latte',
+        price: 20000,
+        image: 'latte.jpg',
+        category: qahvalar,
+      ),
+      MenuModel(
+        name: 'Americano',
+        price: 17000,
+        image: 'americano.jpg',
+        category: qahvalar,
+      ),
+      MenuModel(
+        name: 'Mocha',
+        price: 22000,
+        image: 'mocha.jpg',
+        category: qahvalar,
+      ),
     ],
-    'Salatlar': [
-      ProductModel(name: 'Olivye', price: 25000, image: ''),
-      ProductModel(name: 'Sezar', price: 27000, image: ''),
-      ProductModel(name: 'Vitamin', price: 20000, image: ''),
-      ProductModel(name: 'Tovuq salati', price: 28000, image: ''),
-      ProductModel(name: 'Yengil salat', price: 19000, image: ''),
+    salatlar: [
+      MenuModel(
+        name: 'Olivye',
+        price: 25000,
+        image: 'olivye.jpg',
+        category: salatlar,
+      ),
+      MenuModel(
+        name: 'Sezar',
+        price: 27000,
+        image: 'sezar.jpg',
+        category: salatlar,
+      ),
+      MenuModel(
+        name: 'Vitamin',
+        price: 20000,
+        image: 'vitamin.jpg',
+        category: salatlar,
+      ),
+      MenuModel(
+        name: 'Tovuq salati',
+        price: 28000,
+        image: 'tovuq.jpg',
+        category: salatlar,
+      ),
+      MenuModel(
+        name: 'Yengil salat',
+        price: 19000,
+        image: 'yengil.jpg',
+        category: salatlar,
+      ),
     ],
-    'Shirinliklar': [
-      ProductModel(name: 'Tiramisu', price: 30000, image: ''),
-      ProductModel(name: 'Cheesecake', price: 32000, image: ''),
-      ProductModel(name: 'Brownie', price: 25000, image: ''),
-      ProductModel(name: 'Pirog', price: 22000, image: ''),
-      ProductModel(name: 'Donut', price: 18000, image: ''),
+    shirinliklar: [
+      MenuModel(
+        name: 'Tiramisu',
+        price: 30000,
+        image: 'tiramisu.jpg',
+        category: shirinliklar,
+      ),
+      MenuModel(
+        name: 'Cheesecake',
+        price: 32000,
+        image: 'cheesecake.jpg',
+        category: shirinliklar,
+      ),
+      MenuModel(
+        name: 'Brownie',
+        price: 25000,
+        image: 'brownie.jpg',
+        category: shirinliklar,
+      ),
+      MenuModel(
+        name: 'Pirog',
+        price: 22000,
+        image: 'pirog.jpg',
+        category: shirinliklar,
+      ),
+      MenuModel(
+        name: 'Donut',
+        price: 18000,
+        image: 'donut.jpg',
+        category: shirinliklar,
+      ),
     ],
-    'Ichimliklar': [
-      ProductModel(name: 'Pepsi', price: 10000, image: ''),
-      ProductModel(name: 'Coca-Cola', price: 10000, image: ''),
-      ProductModel(name: 'Fanta', price: 10000, image: ''),
-      ProductModel(name: 'Sharbat', price: 15000, image: ''),
-      ProductModel(name: 'Suv', price: 5000, image: ''),
+    ichimliklar: [
+      MenuModel(
+        name: 'Pepsi',
+        price: 10000,
+        image: 'pepsi.jpg',
+        category: ichimliklar,
+      ),
+      MenuModel(
+        name: 'Coca-Cola',
+        price: 10000,
+        image: 'cola.jpg',
+        category: ichimliklar,
+      ),
+      MenuModel(
+        name: 'Fanta',
+        price: 10000,
+        image: 'fanta.jpg',
+        category: ichimliklar,
+      ),
+      MenuModel(
+        name: 'Sharbat',
+        price: 15000,
+        image: 'sharbat.jpg',
+        category: ichimliklar,
+      ),
+      MenuModel(
+        name: 'Suv',
+        price: 5000,
+        image: 'suv.jpg',
+        category: ichimliklar,
+      ),
     ],
-    'Asosiy taomlar': [
-      ProductModel(name: 'Osh', price: 35000, image: ''),
-      ProductModel(name: 'Lag\'mon', price: 33000, image: ''),
-      ProductModel(name: 'Shashlik', price: 40000, image: ''),
-      ProductModel(name: 'Manti', price: 30000, image: ''),
-      ProductModel(name: 'Somsa', price: 12000, image: ''),
+    asosiyTaomlar: [
+      MenuModel(
+        name: 'Osh',
+        price: 35000,
+        image: 'osh.jpg',
+        category: asosiyTaomlar,
+      ),
+      MenuModel(
+        name: 'Lag\'mon',
+        price: 33000,
+        image: 'lagmon.jpg',
+        category: asosiyTaomlar,
+      ),
+      MenuModel(
+        name: 'Shashlik',
+        price: 40000,
+        image: 'shashlik.jpg',
+        category: asosiyTaomlar,
+      ),
+      MenuModel(
+        name: 'Manti',
+        price: 30000,
+        image: 'manti.jpg',
+        category: asosiyTaomlar,
+      ),
+      MenuModel(
+        name: 'Somsa',
+        price: 12000,
+        image: 'somsa.jpg',
+        category: asosiyTaomlar,
+      ),
     ],
   };
 
   CategoriesScreen({super.key});
 
-  void _showCategoryBottomSheet(BuildContext context, CategoryModel category) {
-    final products = categoryProducts[category.name] ?? [];
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
-      builder: (context) {
-        return FractionallySizedBox(
-          heightFactor: 0.5,
-          child: ListView.builder(
-            padding: EdgeInsets.all(16),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              final product = products[index];
-              int count = 0;
-
-              return StatefulBuilder(
-                builder: (context, setState) {
-                  return Card(
-                    margin: EdgeInsets.only(bottom: 12),
-                    child: ListTile(
-                      leading: Container(
-                        width: 50,
-                        height: 50,
-                        color: Colors.grey.shade300,
-                        child: Center(child: Icon(Icons.image)),
-                      ),
-                      title: Text(product.name),
-                      subtitle: Text("${product.price} so'm"),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.remove),
-                            onPressed: () {
-                              if (count > 0) {
-                                setState(() => count--);
-                              }
-                            },
-                          ),
-                          Text('$count'),
-                          IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              setState(() => count++);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
-      appBar: AppBar(backgroundColor: Color(0xFFF8F9FA)),
+      backgroundColor: const Color(0xFFF8F9FA),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF8F9FA),
+        elevation: 0,
+        title: const Text(
+          "Kategoriyalar",
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
       body: Column(
         children: [
           Spacer(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 2,
-              itemBuilder: (context, index) {
-                return SizedBox();
-              },
-            ),
-          ),
-          CategoriesList(
-            onCategoryTap: (category) =>
-                _showCategoryBottomSheet(context, category),
-          ),
-          SizedBox(height: 30),
+          CategoriesList(categoryProducts: categoryProducts),
+          const SizedBox(height: 30),
         ],
       ),
     );

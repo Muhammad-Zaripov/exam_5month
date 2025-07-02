@@ -21,6 +21,8 @@ class HeaderWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 20),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -41,17 +43,8 @@ class HeaderWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Icon(Icons.restaurant, color: Colors.white, size: 30),
-              ),
             ],
           ),
-          SizedBox(height: 15),
           Text(
             DateTime.now().toString().split(' ')[0],
             style: TextStyle(color: Colors.white70, fontSize: 14),

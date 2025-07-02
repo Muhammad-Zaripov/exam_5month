@@ -1,45 +1,74 @@
-enum TableStatus { available, occupied, reserved, cleaning }
+import '../../../auth/data/models/user_model.dart';
+
+enum TableStatus { available, cleaning, reserved, occupied }
+
+TableStatus tableStatusFromString(String status) {
+  switch (status.toLowerCase()) {
+    case 'available':
+      return TableStatus.available;
+    case 'reserved':
+      return TableStatus.reserved;
+    case 'occupied':
+      return TableStatus.occupied;
+    case 'cleaning':
+      return TableStatus.cleaning;
+    default:
+      return TableStatus.available;
+  }
+}
+
+String tableStatusToString(TableStatus status) {
+  return status.name;
+}
 
 class TableModel {
-  final int number;
+  final String? id;
   final int seats;
   TableStatus status;
-  final String? customerName;
-  final DateTime? reservationTime;
-
+  final int tableNumber;
+  final UserModel? user;
   TableModel({
-    required this.number,
+    this.id,
     required this.seats,
     required this.status,
-    this.customerName,
-    this.reservationTime,
+    required this.tableNumber,
+    this.user,
   });
-
-  factory TableModel.fromJson(Map<String, dynamic> json) {
+  factory TableModel.fromJson(
+    Map<String, dynamic> json,
+    String id, {
+    UserModel? user,
+  }) {
     return TableModel(
-      number: json['number'],
-      seats: json['seats'],
-      status: json['status'],
+      id: id,
+      seats: json['seats'] ?? 0,
+      status: tableStatusFromString(json['status'] ?? 'available'),
+      tableNumber: json['tableNumber'] ?? 0,
+      user: user,
     );
   }
-
   Map<String, dynamic> toJson() {
-    return {'number': number, 'seats': seats, 'status': status};
+    return {
+      'seats': seats,
+      'status': tableStatusToString(status),
+      'tableNumber': tableNumber,
+      'user': user?.id ?? 'null',
+    };
   }
 
   TableModel copyWith({
-    int? number,
+    String? id,
     int? seats,
     TableStatus? status,
-    String? customerName,
-    DateTime? reservationTime,
+    int? tableNumber,
+    UserModel? user,
   }) {
     return TableModel(
-      number: number ?? this.number,
+      id: id ?? this.id,
       seats: seats ?? this.seats,
       status: status ?? this.status,
-      customerName: customerName ?? this.customerName,
-      reservationTime: reservationTime ?? this.reservationTime,
+      tableNumber: tableNumber ?? this.tableNumber,
+      user: user ?? this.user,
     );
   }
 }
