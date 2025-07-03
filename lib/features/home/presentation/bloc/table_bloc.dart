@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/models/table_model.dart';
 import '../../data/repositories/table_repository_impl.dart';
 import 'table_event.dart';
 import 'table_state.dart';
@@ -20,9 +21,26 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     on<AddTable>((event, emit) async {
       try {
         await repository.addTable(event.table);
-        // Optional: reload all tables after adding
         final updatedTables = await repository.getTables();
         emit(TableLoaded(updatedTables));
+      } catch (e) {
+        emit(TableError(e.toString()));
+      }
+    });
+
+    on<ChangeTableStatusEvent>((event, emit) async {
+      try {
+        final currentState = state;
+        if (currentState is TableLoaded) {
+          final updatedTable = event.table.copyWith(status: event.newStatus);
+          await repository.updateTable(updatedTable);
+
+          final updatedTables = currentState.tables.map((table) {
+            return table.id == updatedTable.id ? updatedTable : table;
+          }).toList();
+
+          emit(TableLoaded(updatedTables));
+        }
       } catch (e) {
         emit(TableError(e.toString()));
       }

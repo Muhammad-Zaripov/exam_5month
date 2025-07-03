@@ -13,4 +13,8 @@ class TableRepository {
   Future<void> addTable(TableModel table) async {
     await remote.addTable(table);
   }
+
+  Future<void> updateTable(TableModel table) async {
+    await remote.updateTable(table);
+  }
 }

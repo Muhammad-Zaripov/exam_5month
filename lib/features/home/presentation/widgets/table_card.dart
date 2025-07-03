@@ -1,3 +1,4 @@
+import 'package:exam_5month/features/home/presentation/widgets/bottom_sheet_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/table_model.dart';
@@ -67,6 +68,17 @@ class _TableCardState extends State<TableCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return BottomSheetWidget(
+              status: widget.table.status,
+              table: widget.table,
+            );
+          },
+        );
+      },
       child: AnimatedBuilder(
         animation: _pulseAnimation,
         builder: (context, child) {

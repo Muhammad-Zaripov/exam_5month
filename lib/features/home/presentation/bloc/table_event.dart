@@ -9,3 +9,10 @@ class AddTable extends TableEvent {
 
   AddTable(this.table);
 }
+
+class ChangeTableStatusEvent extends TableEvent {
+  final TableModel table;
+  final TableStatus newStatus;
+
+  ChangeTableStatusEvent({required this.table, required this.newStatus});
+}
