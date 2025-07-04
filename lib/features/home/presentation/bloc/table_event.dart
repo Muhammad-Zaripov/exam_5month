@@ -16,3 +16,8 @@ class ChangeTableStatusEvent extends TableEvent {
 
   ChangeTableStatusEvent({required this.table, required this.newStatus});
 }
+
+class FilterTablesByStatus extends TableEvent {
+  final TableStatus? status;
+  FilterTablesByStatus(this.status);
+}

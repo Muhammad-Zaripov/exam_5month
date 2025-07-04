@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/models/table_model.dart';
 import '../../data/repositories/table_repository_impl.dart';
 import 'table_event.dart';
 import 'table_state.dart';
@@ -43,6 +42,12 @@ class TableBloc extends Bloc<TableEvent, TableState> {
         }
       } catch (e) {
         emit(TableError(e.toString()));
+      }
+    });
+    on<FilterTablesByStatus>((event, emit) {
+      final currentState = state;
+      if (currentState is TableLoaded) {
+        emit(currentState.copyWith(filter: event.status));
       }
     });
   }

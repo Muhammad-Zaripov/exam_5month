@@ -1,88 +1,126 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:exam_5month/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:exam_5month/features/auth/presentation/screens/register_screen.dart';
 import 'package:exam_5month/features/auth/presentation/widgets/custom_text_field_widget.dart';
-import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+import '../../../home/presentation/screens/home_screen.dart';
+import '../../data/models/user_model.dart';
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final _globalKey = GlobalKey<FormState>();
+  void _login() {
+    if (_globalKey.currentState!.validate()) {
+      context.read<AuthBloc>().add(
+        SignInRequested(
+          AuthModel(
+            email: emailController.text,
+            password: passwordController.text,
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final passwordController = TextEditingController();
-    final numberController = TextEditingController();
+    final mediaQueryW = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 130, vertical: 70),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(),
-            Text('Log in', style: TextStyle(fontSize: 50)),
-            SizedBox(height: 100),
-            CustomFormField(
-              inputType: InputType.phone,
-              controller: numberController,
-              label: 'Enter your phone number',
-            ),
-            SizedBox(height: 100),
-            CustomFormField(
-              inputType: InputType.password,
-              controller: passwordController,
-              label: 'Enter your password',
-            ),
-            SizedBox(height: 80),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  end: Alignment.topLeft,
-                  begin: Alignment.bottomRight,
-                  colors: [Color(0xFF2E9055), Color(0xFF35C56E)],
-                ),
+      appBar: AppBar(),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
               ),
-              child: Center(
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            );
+          }
+
+          if (state is AuthSuccess) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (ctx) => const RestaurantHomeScreen()),
+            );
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: mediaQueryW >= 700 ? 140 : 20,
+          ),
+          child: Form(
+            key: _globalKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  spacing: 20,
-                  children: [
-                    Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        border: Border.all(width: 1, color: Color(0xFF757575)),
+                const Text('Log in', style: TextStyle(fontSize: 50)),
+                const SizedBox(height: 100),
+                CustomFormField(
+                  inputType: InputType.email,
+                  controller: emailController,
+                  label: 'Enter your email',
+                ),
+                const SizedBox(height: 30),
+                CustomFormField(
+                  inputType: InputType.password,
+                  controller: passwordController,
+                  label: 'Enter your password',
+                ),
+                const SizedBox(height: 80),
+                GestureDetector(
+                  onTap: _login,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(
+                        end: Alignment.topLeft,
+                        begin: Alignment.bottomRight,
+                        colors: [Color(0xFF2E9055), Color(0xFF35C56E)],
                       ),
                     ),
-                    Text('Remember me', style: TextStyle(fontSize: 20)),
-                  ],
+                    child: const Center(
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
+                const SizedBox(height: 30),
                 Row(
-                  spacing: 10,
                   children: [
-                    Text(
+                    const Text(
                       'Don’t have an account?',
                       style: TextStyle(fontSize: 20, color: Color(0xFF757575)),
                     ),
+                    const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (cxt) => RegisterScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => const RegisterScreen(),
+                        ),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Sign Up',
                         style: TextStyle(
                           fontSize: 20,
@@ -94,34 +132,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 100),
-            Row(
-              spacing: 20,
-              children: [
-                Expanded(child: Divider(thickness: 2)),
-                Text(
-                  'or',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Expanded(child: Divider(thickness: 2)),
-              ],
-            ),
-            SizedBox(height: 100),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 6),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 1, color: Colors.black),
-              ),
-              child: Center(
-                child: Text(
-                  'Continue with Google',
-                  style: TextStyle(fontSize: 40),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

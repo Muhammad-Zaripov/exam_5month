@@ -17,9 +17,7 @@ class TableRemoteDataSource {
         if (data is Map<String, dynamic>) {
           final tables = data.entries.map((entry) {
             final table = TableModel.fromJson(entry.value);
-            return table.copyWith(
-              id: entry.key,
-            ); // id Firebase dan kelmaydi, key sifatida keladi
+            return table.copyWith(id: entry.key);
           }).toList();
           return tables;
         } else {

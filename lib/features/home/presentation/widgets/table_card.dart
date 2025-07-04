@@ -5,9 +5,7 @@ import '../../data/models/table_model.dart';
 
 class TableCard extends StatefulWidget {
   final TableModel table;
-
   const TableCard({super.key, required this.table});
-
   @override
   _TableCardState createState() => _TableCardState();
 }
@@ -16,7 +14,6 @@ class _TableCardState extends State<TableCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
-
   @override
   void initState() {
     super.initState();

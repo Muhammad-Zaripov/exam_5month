@@ -44,8 +44,8 @@ class BottomSheetWidget extends StatelessWidget {
       case TableStatus.available:
         return [
           _StatusAction(
-            icon: Icons.check_circle,
-            title: 'Band qilish',
+            icon: Icons.people,
+            title: 'Mijozga qarash',
             onTap: () {
               Navigator.push(
                 context,
@@ -53,14 +53,30 @@ class BottomSheetWidget extends StatelessWidget {
               );
             },
           ),
+          _StatusAction(
+            icon: Icons.check_circle,
+            title: 'Band qilish',
+            onTap: () {
+              context.read<TableBloc>().add(
+                ChangeTableStatusEvent(
+                  table: table,
+                  newStatus: TableStatus.reserved,
+                ),
+              );
+              Navigator.pop(context);
+            },
+          ),
         ];
       case TableStatus.occupied:
         return [
           _StatusAction(
             icon: Icons.people,
-            title: 'Buyurtmalarni ko‘rish',
+            title: 'Mijozga qarash',
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => CategoriesScreen()),
+              );
             },
           ),
           _StatusAction(
@@ -83,6 +99,12 @@ class BottomSheetWidget extends StatelessWidget {
             icon: Icons.schedule,
             title: 'Zaxirani bekor qilish',
             onTap: () {
+              context.read<TableBloc>().add(
+                ChangeTableStatusEvent(
+                  table: table,
+                  newStatus: TableStatus.available,
+                ),
+              );
               Navigator.pop(context);
             },
           ),
@@ -90,6 +112,12 @@ class BottomSheetWidget extends StatelessWidget {
             icon: Icons.people,
             title: 'Mijozlarni joylashtirish',
             onTap: () {
+              context.read<TableBloc>().add(
+                ChangeTableStatusEvent(
+                  table: table,
+                  newStatus: TableStatus.occupied,
+                ),
+              );
               Navigator.pop(context);
             },
           ),
@@ -100,6 +128,12 @@ class BottomSheetWidget extends StatelessWidget {
             icon: Icons.cleaning_services,
             title: 'Tozalandi deb belgilash',
             onTap: () {
+              context.read<TableBloc>().add(
+                ChangeTableStatusEvent(
+                  table: table,
+                  newStatus: TableStatus.available,
+                ),
+              );
               Navigator.pop(context);
             },
           ),

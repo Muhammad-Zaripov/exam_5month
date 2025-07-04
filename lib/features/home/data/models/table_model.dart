@@ -1,4 +1,3 @@
-import '../../../auth/data/models/user_model.dart';
 import 'user_model.dart';
 
 enum TableStatus { available, cleaning, reserved, occupied }

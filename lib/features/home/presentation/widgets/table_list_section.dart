@@ -21,7 +21,7 @@ class TableListSection extends StatelessWidget {
             children: [
               RestaurantStats(tables: state.tables),
               const SizedBox(height: 20),
-              Expanded(child: TablesGrid(tables: state.tables)),
+              Expanded(child: TablesGrid(tables: state.filteredTables)),
             ],
           );
         }
