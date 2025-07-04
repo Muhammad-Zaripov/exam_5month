@@ -1,7 +1,11 @@
+import 'package:exam_5month/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../auth/data/repositories/auth_local_repository.dart';
+
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({super.key});
+  final AuthLocalDatasource _authRepositories = AuthLocalDatasource();
+  HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +23,13 @@ class HeaderWidget extends StatelessWidget {
           bottomRight: Radius.circular(30),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(height: 20),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
               Text(
                 'Restoran boshqaruvi',
                 style: TextStyle(
@@ -34,11 +38,21 @@ class HeaderWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Text(
+                DateTime.now().toString().split(' ')[0],
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
+              ),
             ],
           ),
-          Text(
-            DateTime.now().toString().split(' ')[0],
-            style: const TextStyle(color: Colors.white70, fontSize: 14),
+          IconButton(
+            onPressed: () {
+              _authRepositories.removeToken();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (cxt) => WelcomeScreen()),
+              );
+            },
+            icon: Icon(Icons.logout, color: Colors.white),
           ),
         ],
       ),

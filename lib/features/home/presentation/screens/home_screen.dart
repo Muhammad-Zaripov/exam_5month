@@ -25,10 +25,10 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       body: Column(
-        children: const [
+        children: [
           HeaderWidget(),
-          SizedBox(height: 20),
-          Expanded(child: TableListSection()),
+          const SizedBox(height: 20),
+          const Expanded(child: TableListSection()),
         ],
       ),
       floatingActionButton: const AddTableButton(),

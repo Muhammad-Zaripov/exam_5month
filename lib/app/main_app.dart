@@ -1,5 +1,4 @@
 import 'package:exam_5month/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:exam_5month/features/auth/presentation/screens/register_screen.dart';
 import 'package:exam_5month/features/auth/presentation/screens/start_screen.dart';
 import 'package:exam_5month/features/home/presentation/bloc/table_bloc.dart';
 import 'package:flutter/material.dart';
