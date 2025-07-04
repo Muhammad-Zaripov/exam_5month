@@ -28,6 +28,7 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
         children: [
           HeaderWidget(),
           const SizedBox(height: 20),
+
           const Expanded(child: TableListSection()),
         ],
       ),

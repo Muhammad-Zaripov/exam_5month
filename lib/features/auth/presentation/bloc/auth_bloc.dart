@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/auth_repository_datasurce.dart';
-import '../../data/models/user_model.dart';
+import '../../data/models/auth_model.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/usecases/sign_in.dart';
 import '../../domain/usecases/sign_up.dart';

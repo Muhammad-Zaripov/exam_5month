@@ -1,4 +1,4 @@
-import 'package:exam_5month/features/auth/data/models/user_model.dart';
+import 'package:exam_5month/features/auth/data/models/auth_model.dart';
 import 'package:exam_5month/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:exam_5month/features/auth/presentation/widgets/custom_text_field_widget.dart';
 import 'package:exam_5month/features/home/presentation/screens/home_screen.dart';

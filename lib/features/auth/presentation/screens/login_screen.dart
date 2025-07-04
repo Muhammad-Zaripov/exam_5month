@@ -5,7 +5,7 @@ import 'package:exam_5month/features/auth/presentation/screens/register_screen.d
 import 'package:exam_5month/features/auth/presentation/widgets/custom_text_field_widget.dart';
 
 import '../../../home/presentation/screens/home_screen.dart';
-import '../../data/models/user_model.dart';
+import '../../data/models/auth_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

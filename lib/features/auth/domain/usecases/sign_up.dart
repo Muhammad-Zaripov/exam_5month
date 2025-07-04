@@ -1,4 +1,4 @@
-import '../../data/models/user_model.dart';
+import '../../data/models/auth_model.dart';
 import '../repositories/auth_repository.dart';
 
 class SignUpUseCase {
