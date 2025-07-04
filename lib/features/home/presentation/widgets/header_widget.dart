@@ -1,11 +1,13 @@
-import 'package:exam_5month/features/auth/presentation/screens/user_informations_screen.dart.dart';
+import 'package:exam_5month/features/auth/data/repositories/auth_local_repository.dart';
 import 'package:flutter/material.dart';
+import '../../../auth/presentation/screens/welcome_screen.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AuthLocalDatasource authRepositories = AuthLocalDatasource();
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -43,12 +45,13 @@ class HeaderWidget extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
+              authRepositories.removeToken();
+              Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (cxt) => UserInformationsScreen()),
+                MaterialPageRoute(builder: (cxt) => WelcomeScreen()),
               );
             },
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.logout),
           ),
         ],
       ),

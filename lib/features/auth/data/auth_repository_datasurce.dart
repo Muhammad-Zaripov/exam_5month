@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-
 import 'models/auth_model.dart';
-import 'models/user_model.dart';
 import 'repositories/auth_local_repository.dart';
 
 class AuthRemoteDatasource {
@@ -70,25 +68,4 @@ class AuthRemoteDatasource {
       throw Exception(e.message);
     }
   }
-
-  Future<UserModel?> getUserData() async {
-    final uid = firebaseAuth.currentUser?.uid;
-    if (uid == null) return null;
-
-    final snapshot = await FirebaseDatabase.instance
-        .ref()
-        .child('user')
-        .child(uid)
-        .get();
-
-    if (snapshot.exists) {
-      return UserModel.fromJson(
-        Map<String, dynamic>.from(snapshot.value as Map),
-        uid,
-      );
-    }
-
-    return null;
-  }
-  
 }
