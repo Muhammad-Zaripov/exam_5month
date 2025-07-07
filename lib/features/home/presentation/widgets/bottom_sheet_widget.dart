@@ -49,7 +49,7 @@ class BottomSheetWidget extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => Categoriesly()),
+                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
               );
             },
           ),
@@ -75,7 +75,7 @@ class BottomSheetWidget extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => Categoriesly()),
+                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
               );
             },
           ),
@@ -118,7 +118,10 @@ class BottomSheetWidget extends StatelessWidget {
                   newStatus: TableStatus.occupied,
                 ),
               );
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
+              );
             },
           ),
         ];
