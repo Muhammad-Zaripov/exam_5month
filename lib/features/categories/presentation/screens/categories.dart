@@ -5,6 +5,7 @@ import '../../../home/presentation/bloc/table_bloc.dart';
 import '../../../home/presentation/bloc/table_event.dart';
 import '../../../home/data/models/table_model.dart';
 
+import '../../data/models/food_item.dart';
 import '../widgets/cakesbottomsheet.dart';
 import '../widgets/categorybuttons.dart';
 import '../widgets/coffeebottomsheet.dart';
@@ -12,16 +13,15 @@ import '../widgets/drinkbottomsheet.dart';
 import '../widgets/mainfoodsbottomsheet.dart';
 import '../widgets/saladbottomsheet.dart';
 
-class FoodItem {
-  final String name;
-  int quantity;
+// class FoodItem {
+//   final String name;
+//   int quantity;
 
-  FoodItem({required this.name, required this.quantity});
-}
+//   FoodItem({required this.name, required this.quantity});
+// }
 
 class Categoriesly extends StatefulWidget {
-  final dynamic
-  selectedTable; // TableModel type, but dynamic for now to avoid import issues
+  final dynamic selectedTable;
   const Categoriesly({super.key, this.selectedTable});
 
   @override

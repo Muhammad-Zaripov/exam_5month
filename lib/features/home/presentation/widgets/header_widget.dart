@@ -1,4 +1,5 @@
 import 'package:exam_5month/features/auth/data/repositories/auth_local_repository.dart';
+import 'package:exam_5month/features/history/presentation/screens/history_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../auth/presentation/screens/welcome_screen.dart';
 
@@ -46,12 +47,21 @@ class HeaderWidget extends StatelessWidget {
           IconButton(
             onPressed: () {
               authRepositories.removeToken();
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (cxt) => WelcomeScreen()),
               );
             },
             icon: Icon(Icons.logout),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (cxt) => HistoryScreen()),
+              );
+            },
+            icon: Icon(Icons.history),
           ),
         ],
       ),

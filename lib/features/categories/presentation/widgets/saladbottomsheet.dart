@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../screens/categories.dart';
+import '../../../history/data/repositories/history_repository.dart';
+import '../../data/models/food_item.dart';
 import 'foodsbuttons.dart';
 
 class Saladbottomsheet extends StatefulWidget {
@@ -20,6 +21,7 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
     FoodItem(name: "Tovuq salati", quantity: 0),
   ];
 
+  final HistoryRepository historyRepository = HistoryRepository();
   final TextEditingController controller = TextEditingController();
   final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
 
@@ -58,7 +60,6 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
     final filtered = selected.where((e) => e.quantity > 0).toList();
     widget.onSelected(filtered);
     await saveToFirebase(filtered);
-    Navigator.pop(context);
   }
 
   @override

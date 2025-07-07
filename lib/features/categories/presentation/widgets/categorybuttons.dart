@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../screens/categories.dart';
+import '../../data/models/food_item.dart';
 
 class Categorybuttons extends StatelessWidget {
   final String name;

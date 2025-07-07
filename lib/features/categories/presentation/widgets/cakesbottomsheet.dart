@@ -1,7 +1,8 @@
+import 'package:exam_5month/features/history/data/repositories/history_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../screens/categories.dart';
+import '../../data/models/food_item.dart';
 import 'foodsbuttons.dart';
 
 class Cakesbottomsheet extends StatefulWidget {
@@ -19,6 +20,7 @@ class _CakesbottomsheetState extends State<Cakesbottomsheet> {
     FoodItem(name: "Tiramisu", quantity: 0),
     FoodItem(name: "Honey Cake", quantity: 0),
   ];
+  final HistoryRepository historyRepository = HistoryRepository();
 
   final TextEditingController nameController = TextEditingController();
   final _dbRef = FirebaseDatabase.instance.ref();
@@ -108,7 +110,6 @@ class _CakesbottomsheetState extends State<Cakesbottomsheet> {
                       .toList();
                   widget.onSelected(filtered);
                   await submitToFirebase(filtered);
-                  Navigator.pop(context);
                 },
                 child: const Text("Buyurtmani yuborish"),
               ),

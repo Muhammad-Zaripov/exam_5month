@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import '../screens/categories.dart';
+import '../../../history/data/repositories/history_repository.dart';
+import '../../data/models/food_item.dart';
 import 'foodsbuttons.dart';
 
 class Drinkbottomsheet extends StatefulWidget {
@@ -19,6 +20,7 @@ class _DrinkbottomsheetState extends State<Drinkbottomsheet> {
     FoodItem(name: "Fanta", quantity: 0),
     FoodItem(name: "Sharbat", quantity: 0),
   ];
+  final HistoryRepository historyRepository = HistoryRepository();
 
   final TextEditingController controller = TextEditingController();
   final _dbRef = FirebaseDatabase.instance.ref();
@@ -58,7 +60,6 @@ class _DrinkbottomsheetState extends State<Drinkbottomsheet> {
     final filtered = selected.where((e) => e.quantity > 0).toList();
     widget.onSelected(filtered);
     await submitToFirebase(filtered);
-    Navigator.pop(context);
   }
 
   @override
