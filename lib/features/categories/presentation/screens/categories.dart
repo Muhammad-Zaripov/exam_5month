@@ -13,13 +13,6 @@ import '../widgets/drinkbottomsheet.dart';
 import '../widgets/mainfoodsbottomsheet.dart';
 import '../widgets/saladbottomsheet.dart';
 
-// class FoodItem {
-//   final String name;
-//   int quantity;
-
-//   FoodItem({required this.name, required this.quantity});
-// }
-
 class Categoriesly extends StatefulWidget {
   final dynamic selectedTable;
   const Categoriesly({super.key, this.selectedTable});
@@ -194,12 +187,14 @@ class _CategorieslyState extends State<Categoriesly> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    ...orderedItems.map(
-                      (item) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text("${item.name} - ${item.quantity} ta"),
-                      ),
-                    ),
+                    ...orderedItems
+                        .map(
+                          (item) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text("${item.name} - ${item.quantity} ta"),
+                          ),
+                        )
+                        .toList(),
                   ],
                 ),
               ),
