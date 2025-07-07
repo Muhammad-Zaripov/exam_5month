@@ -165,14 +165,15 @@ class _CategorieslyState extends State<Categoriesly> {
     return BlocProvider.value(
       value: context.read<TableBloc>(),
       child: Scaffold(
+        backgroundColor: Color(0xFFF8F9FA),
         appBar: AppBar(
+          backgroundColor: Color(0xFFF8F9FA),
           title: const Text(
             "Kategoriyalar",
             style: TextStyle(color: Colors.black),
           ),
           centerTitle: true,
           iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
           actions: [
             IconButton(icon: const Icon(Icons.add), onPressed: addNewItem),
           ],
@@ -193,14 +194,12 @@ class _CategorieslyState extends State<Categoriesly> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    ...orderedItems
-                        .map(
-                          (item) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text("${item.name} - ${item.quantity} ta"),
-                          ),
-                        )
-                        .toList(),
+                    ...orderedItems.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Text("${item.name} - ${item.quantity} ta"),
+                      ),
+                    ),
                   ],
                 ),
               ),
