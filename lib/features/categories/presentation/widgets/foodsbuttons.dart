@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class Foodsbuttons extends StatefulWidget {
+class FoodsButtons extends StatefulWidget {
   final String names;
   final int initialNumber;
   final void Function(String, int) onChanged;
 
-  const Foodsbuttons({
+  const FoodsButtons({
     super.key,
     required this.names,
     required this.initialNumber,
@@ -14,12 +14,11 @@ class Foodsbuttons extends StatefulWidget {
   });
 
   @override
-  State<Foodsbuttons> createState() => _FoodsbuttonsState();
+  State<FoodsButtons> createState() => _FoodsButtonsState();
 }
 
-class _FoodsbuttonsState extends State<Foodsbuttons> {
+class _FoodsButtonsState extends State<FoodsButtons> {
   late int count;
-
   final databaseRef = FirebaseDatabase.instance.ref("orders");
 
   @override
@@ -68,7 +67,7 @@ class _FoodsbuttonsState extends State<Foodsbuttons> {
             color: Colors.black.withOpacity(0.05),
             blurRadius: 5,
             offset: const Offset(0, 3),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -105,7 +104,7 @@ class _FoodsbuttonsState extends State<Foodsbuttons> {
                 icon: const Icon(Icons.add_circle_outline, color: Colors.green),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

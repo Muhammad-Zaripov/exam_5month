@@ -1,4 +1,4 @@
-import 'package:exam_5month/features/categories/presentation/screens/categories.dart';
+import 'package:exam_5month/features/categories/presentation/screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/table_model.dart';
@@ -49,7 +49,9 @@ class BottomSheetWidget extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
+                MaterialPageRoute(
+                  builder: (ctx) => CategorieslyScreen(selectedTable: table),
+                ),
               );
             },
           ),
@@ -75,7 +77,9 @@ class BottomSheetWidget extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
+                MaterialPageRoute(
+                  builder: (ctx) => CategorieslyScreen(selectedTable: table),
+                ),
               );
             },
           ),
@@ -120,7 +124,9 @@ class BottomSheetWidget extends StatelessWidget {
               );
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (ctx) => Categoriesly(selectedTable: table)),
+                MaterialPageRoute(
+                  builder: (ctx) => CategorieslyScreen(selectedTable: table),
+                ),
               );
             },
           ),

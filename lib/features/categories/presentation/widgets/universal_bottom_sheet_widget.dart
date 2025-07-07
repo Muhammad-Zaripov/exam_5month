@@ -1,29 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../history/data/repositories/history_repository.dart';
+import '../../../home/data/models/table_model.dart';
 import '../../data/models/food_item.dart';
+import '../bloc/order_bloc.dart';
+import '../bloc/order_event.dart';
 import 'foodsbuttons.dart';
 
-class Saladbottomsheet extends StatefulWidget {
+class UniversalBottomSheet extends StatefulWidget {
+  final String title;
+  final String firebasePath;
+  final List<String> initialItems;
+  final TableModel selectedTable;
   final void Function(List<FoodItem>) onSelected;
-  const Saladbottomsheet({super.key, required this.onSelected});
+
+  const UniversalBottomSheet({
+    super.key,
+    required this.title,
+    required this.firebasePath,
+    required this.initialItems,
+    required this.onSelected,
+    required this.selectedTable,
+  });
 
   @override
-  State<Saladbottomsheet> createState() => _SaladbottomsheetState();
+  State<UniversalBottomSheet> createState() => _UniversalBottomSheetState();
 }
 
-class _SaladbottomsheetState extends State<Saladbottomsheet> {
-  final List<FoodItem> selected = [
-    FoodItem(name: "Olivye", quantity: 0),
-    FoodItem(name: "Sezar", quantity: 0),
-    FoodItem(name: "Vitamin", quantity: 0),
-    FoodItem(name: "Tovuq salati", quantity: 0),
-  ];
-
-  final HistoryRepository historyRepository = HistoryRepository();
+class _UniversalBottomSheetState extends State<UniversalBottomSheet> {
+  late List<FoodItem> selected;
   final TextEditingController controller = TextEditingController();
-  final DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.initialItems
+        .map((e) => FoodItem(name: e, quantity: 0))
+        .toList();
+  }
 
   void updateItem(String name, int qty) {
     final index = selected.indexWhere((e) => e.name == name);
@@ -46,21 +60,15 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
     }
   }
 
-  Future<void> saveToFirebase(List<FoodItem> items) async {
-    final filtered = items.where((e) => e.quantity > 0).toList();
-    for (var item in filtered) {
-      await _dbRef.child("orders/salads/${item.name}").set({
-        'name': item.name,
-        'quantity': item.quantity,
-      });
-    }
-  }
 
-  void submitOrder() async {
-    final filtered = selected.where((e) => e.quantity > 0).toList();
-    widget.onSelected(filtered);
-    await saveToFirebase(filtered);
-  }
+  void submitOrder() {
+  final filtered = selected.where((e) => e.quantity > 0).toList();
+  if (filtered.isEmpty) return;
+  context.read<OrderBloc>().add(AddItem(filtered, context));
+
+  Navigator.pop(context);
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +79,9 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              "Salat tanlang",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              widget.title,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             Wrap(
@@ -81,7 +89,7 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
               runSpacing: 8,
               children: selected
                   .map(
-                    (item) => Foodsbuttons(
+                    (item) => FoodsButtons(
                       names: item.name,
                       initialNumber: item.quantity,
                       onChanged: updateItem,
@@ -96,7 +104,7 @@ class _SaladbottomsheetState extends State<Saladbottomsheet> {
                   child: TextField(
                     controller: controller,
                     decoration: const InputDecoration(
-                      hintText: "Yangi salat nomi",
+                      hintText: "Yangi nom qo'shish",
                     ),
                   ),
                 ),
